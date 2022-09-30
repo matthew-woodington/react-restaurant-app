@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
-function MenuItem({ item }) {
+function MenuItem({ item, ...props }) {
   return (
     <li>
       <Card style={{ width: "18rem" }}>
@@ -9,7 +10,12 @@ function MenuItem({ item }) {
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>{item.description}</Card.Text>
         </Card.Body>
-        <Card.Footer>${item.price}</Card.Footer>
+        <Card.Footer>
+          ${item.price}{" "}
+          <Button variant="secondary" type="button" onClick={() => props.updateOrder(item.id)}>
+            Add to Order
+          </Button>
+        </Card.Footer>
       </Card>
     </li>
   );
