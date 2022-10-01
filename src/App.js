@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import Menu from "./components/Menu/Menu";
 import Order from "./components/Order/Order";
+import NavBar from "./components/NavBar/NavBar";
 
 const INITIAL_MENU_ITEMS = [
   {
@@ -174,10 +175,17 @@ function App() {
   };
 
   return (
-    <div>
-      <Menu menuItems={menuItems} updateOrder={updateOrder} />
-      <Order order={order} />
-    </div>
+    <>
+      <nav>
+        <NavBar />
+      </nav>
+      <main>
+        <section className="menuArea">
+          <Menu menuItems={menuItems} updateOrder={updateOrder} />
+          <Order order={order} />
+        </section>
+      </main>
+    </>
   );
 }
 

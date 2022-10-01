@@ -3,14 +3,14 @@ import Button from "react-bootstrap/Button";
 
 function MenuItem({ item, ...props }) {
   return (
-    <li>
+    <li className="menu-item">
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={item.image} />
+        <Card.Img className="menu-image" variant="top" src={item.image} />
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
           <Card.Text>{item.description}</Card.Text>
         </Card.Body>
-        <Card.Footer>
+        <Card.Footer className="card-footer">
           ${item.price}{" "}
           <Button variant="secondary" type="button" onClick={() => props.updateOrder(item.id)}>
             Add to Order

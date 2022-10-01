@@ -45,9 +45,9 @@ function Menu({ menuItems, ...props }) {
     .map((item) => <MenuItem key={item.id} item={item} updateOrder={props.updateOrder} />);
 
   return (
-    <div>
+    <div className="main-menu">
         <MenuFilter updateFilter={updateFilter}/>
-        <ul>{menuList}</ul>
+        <ul className="menu-list">{menuList}</ul>
     </div>
   );
 }
