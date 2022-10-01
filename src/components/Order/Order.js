@@ -9,8 +9,10 @@ function Order({ order }) {
   return (
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="1">
-        <Accordion.Header>Your Order: <span>{order.length}</span></Accordion.Header>
-        <Accordion.Body><ul>{orderList}</ul></Accordion.Body>
+        <Accordion.Header>Your Order <span>{order.length}</span></Accordion.Header>
+        <Accordion.Body>
+            <ul>{orderList}</ul>
+        </Accordion.Body>
       </Accordion.Item>
     </Accordion>
   );
