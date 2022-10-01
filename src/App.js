@@ -4,6 +4,7 @@ import { useState } from "react";
 import Menu from "./components/Menu/Menu";
 import Order from "./components/Order/Order";
 import NavBar from "./components/NavBar/NavBar";
+import FeaturedSection from "./components/FeaturedSection/FeaturedSection";
 
 const INITIAL_MENU_ITEMS = [
   {
@@ -61,6 +62,15 @@ const INITIAL_MENU_ITEMS = [
     id: nanoid(),
   },
   {
+    name: "Arugula Pizza",
+    image:
+      "https://popmenucloud.com/cdn-cgi/image/width=1920,height=1920,format=auto,fit=scale-down/lcafvugo/4622e518-fdcc-4eec-94bd-58cb096aec15",
+    description: "prosciutto, arugula, mozzarella, pecorino",
+    price: 18.75,
+    type: "pizza",
+    id: nanoid(),
+  },
+  {
     name: "Cheese Pizza",
     image:
       "https://lh3.googleusercontent.com/fAC38m3HSINLlbYcoD3evtUtSIJUHD1zmcJZWumWY77J4xsfZch4syWvQtsJ_mDKVat_CUjI6fXQNrpbfzt75g=s0",
@@ -81,7 +91,7 @@ const INITIAL_MENU_ITEMS = [
   },
   {
     name: "Chicken Bacon Ranch Pizza",
-    image: "https://www.andhattiemakesthree.com/wp-content/uploads/2020/05/IMG_8527-735x490.jpg",
+    image: "http://sidewallpizza.com/img/pizza2.png",
     description: "chopped bacon, buttermilk ranch, white cheddar & mozzarella, chives",
     price: 20.5,
     type: "pizza",
@@ -136,7 +146,7 @@ const INITIAL_MENU_ITEMS = [
   {
     name: "Smoky Salad",
     image:
-      "https://assets.simpleviewinc.com/simpleview/image/fetch/q_75/https://assets.simpleviewinc.com/simpleview/image/upload/crm/greenville/4_6EEB9823-5056-A36F-23BF9BB570401BDB-6eeb96015056a36_6eeb9fbe-5056-a36f-232eb9f93b41ec29.jpg",
+      "https://images.squarespace-cdn.com/content/v1/553868b7e4b06a2cbbe6c683/1485750264453-AM0CWBDE5VR9QTDLQAQN/image-asset.jpeg?format=1000w",
     description:
       "roasted corn, roasted broccoli, grape tomatoes, red onion, goat cheese, smoky candied walnuts, organic spring mix, basil dressing",
     price: 8.75,
@@ -174,15 +184,30 @@ function App() {
     setOrder([...order, newOrderItem]);
   };
 
+  const addOrder = (order, name, phone) => {
+      let finalOrder = {order, name, phone};
+      alert("Your order has been submitted, thank you for your business!")
+      console.log(finalOrder);
+  }
+
+  const resetOrder = () => {
+    setOrder([]);
+  }
+
   return (
     <>
       <nav>
         <NavBar />
       </nav>
-      <main>
+      <main className="main">
+        <section className="featured">
+          <FeaturedSection />
+        </section>
         <section className="menuArea">
           <Menu menuItems={menuItems} updateOrder={updateOrder} />
-          <Order order={order} />
+          <aside className="sidebar">
+            <Order order={order} addOrder={addOrder} resetOrder={resetOrder} />
+          </aside>
         </section>
       </main>
     </>
