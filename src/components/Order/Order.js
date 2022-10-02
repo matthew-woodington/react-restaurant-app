@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 
 function Order({ order, addOrder, resetOrder }) {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState("");
+  const [customer, setCustomer] = useState("");
   const [phone, setPhone] = useState("");
 
   const handleClose = () => {
@@ -28,8 +28,8 @@ function Order({ order, addOrder, resetOrder }) {
   }
 
   const handleSubmit = () => {
-    addOrder(order, name, phone);
-    setName("");
+    addOrder(order, customer, phone);
+    setCustomer("");
     setPhone("");
     resetOrder();
   };
@@ -46,10 +46,12 @@ function Order({ order, addOrder, resetOrder }) {
       <Accordion.Item eventKey="1">
         <Accordion.Header>
           Your Order
-          <Badge bg="danger">{order.length}</Badge>
+          <Badge className="order-length" bg="danger">
+            {order.length}
+          </Badge>
         </Accordion.Header>
         <Accordion.Body>
-          <ListGroup variant="flush">
+          <ListGroup variant="flush" className="order-rows">
             {orderList}
             <ListGroup.Item
               variant="dark"
@@ -68,14 +70,16 @@ function Order({ order, addOrder, resetOrder }) {
                     <Form.Group className="mb-3" controlId="name">
                       <Form.Label>Name</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         placeholder="Enter name"
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setCustomer(e.target.value)}
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="phone">
                       <Form.Label>Phone Number</Form.Label>
                       <Form.Control
+                        required
                         type="text"
                         placeholder="Enter phone number"
                         onChange={(e) => setPhone(e.target.value)}

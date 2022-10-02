@@ -1,16 +1,17 @@
 import "./App.css";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./components/Menu/Menu";
 import Order from "./components/Order/Order";
 import NavBar from "./components/NavBar/NavBar";
 import FeaturedSection from "./components/FeaturedSection/FeaturedSection";
+import AsideInfo from "./components/AsideInfo/AsideInfo";
 
 const INITIAL_MENU_ITEMS = [
   {
     name: "Margherita Pizza",
     image:
-      "https://ohsweetbasil.com/wp-content/uploads/four-cheese-margherita-pizza-recipe-12-scaled.jpg",
+      "https://toast-local-nyc3-production.nyc3.cdn.digitaloceanspaces.com/restaurants/5a3c97ef-6243-4a8f-a64a-d7710c72ad9d/sidewall-pizza-company-consumer-78944-660.webp",
     description: "fresh mozzarella, fresh basil, extra virgin olive oil",
     price: 16,
     type: "pizza",
@@ -100,7 +101,7 @@ const INITIAL_MENU_ITEMS = [
   {
     name: "Buffalo Chicken Dip",
     image:
-      "https://www.thespruceeats.com/thmb/2l4vDM4BJ5JM4y7eXKHEqnvhbgM=/1414x1414/smart/filters:no_upscale()/BuffaloChickenDip-GettyImages-639872178-5a84f83a43a103003655c2e7.jpg",
+      "https://static01.nyt.com/images/2019/02/03/dining/03a3_recipe/as-buffalo-dip-articleLarge-v2.jpg",
     description:
       "chicken, homemade hot sauce, blue cheese dressing, blue cheese crumbles, cream cheese, and mozzarella",
     price: 11.5,
@@ -177,6 +178,7 @@ const INITIAL_MENU_ITEMS = [
 function App() {
   const [menuItems, setMenuItems] = useState(INITIAL_MENU_ITEMS);
   const [order, setOrder] = useState([]);
+  const [submittedOrders, setSubmittedOrders] = useState([]);
 
   const updateOrder = (id) => {
     const index = menuItems.findIndex((item) => item.id === id);
@@ -184,11 +186,16 @@ function App() {
     setOrder([...order, newOrderItem]);
   };
 
-  const addOrder = (order, name, phone) => {
-      let finalOrder = {order, name, phone};
+  const addOrder = (order, customer, phone) => {
+      let finalOrder = {order, customer, phone};
       alert("Your order has been submitted, thank you for your business!")
       console.log(finalOrder);
+      setSubmittedOrders([...submittedOrders, finalOrder]);
   }
+
+  useEffect(() => {
+    localStorage.setItem('submittedOrders', JSON.stringify(submittedOrders))
+  }, [submittedOrders]);
 
   const resetOrder = () => {
     setOrder([]);
@@ -207,6 +214,7 @@ function App() {
           <Menu menuItems={menuItems} updateOrder={updateOrder} />
           <aside className="sidebar">
             <Order order={order} addOrder={addOrder} resetOrder={resetOrder} />
+            <AsideInfo />
           </aside>
         </section>
       </main>
